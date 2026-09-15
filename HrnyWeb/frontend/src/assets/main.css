@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&display=swap");
+
+:root {
+  --ui-surface: #fbf5dd;
+  --ui-surface-sunken: #ead8a3;
+  --ui-background: #24261f;
+  --ui-ink: #1c1c1c;
+  --ui-muted: #6d5526;
+  --ui-primary: #2fa84f;
+  --ui-gold: #f0a232;
+  --ui-focus: #3aa0e6;
+
+  color-scheme: light;
+
+  font-family: "VT323", "Courier New", monospace;
+  color: var(--ui-ink);
+  background-color: var(--ui-background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+:root[data-theme="dark"] {
+  --ui-surface: #30332b;
+  --ui-surface-sunken: #20221d;
+  --ui-background: #151711;
+  --ui-ink: #f5edcf;
+  --ui-muted: #d8cfac;
+  --ui-gold: #f0a232;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--ui-background);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+#app {
+  min-height: 100vh;
+}
