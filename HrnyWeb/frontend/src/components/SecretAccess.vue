@@ -48,8 +48,8 @@ const toggleAccess = async () => {
         title="Secret access"
         :text="
           isOpen
-            ? 'Close heaven password.'
-            : 'Open heaven password.'
+            ? 'Close treasure password.'
+            : 'Open treasure password.'
         "
         aria-label="Toggle secret access"
         :aria-expanded="isOpen"

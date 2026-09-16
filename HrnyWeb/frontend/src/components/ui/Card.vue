@@ -85,8 +85,7 @@ defineProps({
     0 -4px rgba(0, 0, 0, 0.35) inset,
     0 4px rgba(255, 255, 255, 0.75) inset,
     -4px 0 rgba(255, 255, 255, 0.35) inset,
-    4px 0 rgba(0, 0, 0, 0.35) inset,
-    0 6px 0 rgba(0, 0, 0, 0.3);
+    4px 0 rgba(0, 0, 0, 0.35) inset;
 }
 
 .ui-card__head {

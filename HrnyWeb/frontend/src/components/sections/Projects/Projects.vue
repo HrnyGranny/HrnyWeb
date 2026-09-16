@@ -1,33 +1,63 @@
 <script setup>
+import { computed, ref } from "vue"
+
 import Card from "@/components/ui/Card.vue"
 import Button from "@/components/ui/Button.vue"
 
 const projects = [
   {
     id: 1,
-    title: "Project One",
-    status: "Coming soon",
+    title: "Mail4all",
+    status: "In progress",
     description:
-      "A short description explaining what the project does and why it was created.",
-    technology: "Vue",
+      "Completely free web app to send, receive and check emails anonymously, with no registration required.",
+    technology: "Vue / Node.js",
+    type: "WebApp",
+    githubUrl: "",
+    websiteUrl: "https://mail4all.app",
   },
   {
     id: 2,
-    title: "Project Two",
-    status: "Prototype",
-    description:
-      "Another project placeholder ready to be replaced with real information.",
-    technology: "JavaScript",
+    title: "FileForge",
+    status: "Released",
+    description: "Desktop app to compress files.",
+    technology: "C#",
+    type: "DesktopApp",
+    githubUrl: "https://github.com/HrnyGranny/FileForge",
+    websiteUrl: "",
   },
   {
     id: 3,
-    title: "Project Three",
-    status: "In progress",
+    title: "GhostPointer",
+    status: "Released",
     description:
-      "A future project with links, technologies and additional information.",
-    technology: "CSS",
+      "A Python project focused on pointer interaction.",
+    technology: "Python",
+    type: "DesktopApp",
+    githubUrl: "https://github.com/HrnyGranny/GhostPointer",
+    websiteUrl: "",
+  },
+  {
+    id: 4,
+    title: "LucIA",
+    status: "Prototype",
+    description: "A girlfriend AI assistant.",
+    technology: "Python",
+    type: "DesktopApp",
+    githubUrl: "https://github.com/HrnyGranny/LucIA",
+    websiteUrl: "",
   },
 ]
+
+const selectedType = ref("all")
+
+const filteredProjects = computed(() => {
+  if (selectedType.value === "all") {
+    return projects
+  }
+
+  return projects.filter((project) => project.type === selectedType.value)
+})
 </script>
 
 <template>
@@ -41,9 +71,20 @@ const projects = [
       </p>
     </header>
 
+    <div class="projects__filters">
+      <label class="projects__type-filter">
+        <span class="visually-hidden">Filter projects by type</span>
+        <select v-model="selectedType" aria-label="Filter projects by type">
+          <option value="all">All projects</option>
+          <option value="WebApp">WebApp</option>
+          <option value="DesktopApp">DesktopApp</option>
+        </select>
+      </label>
+    </div>
+
     <div class="projects__grid">
       <Card
-        v-for="project in projects"
+        v-for="project in filteredProjects"
         :key="project.id"
         :title="project.title"
         :chip="project.status"
@@ -53,7 +94,10 @@ const projects = [
           <p>{{ project.description }}</p>
 
           <div class="projects__actions">
-            <Button disabled>
+            <Button
+              :href="project.websiteUrl || project.githubUrl"
+              :disabled="!project.websiteUrl && !project.githubUrl"
+            >
               View project
             </Button>
           </div>
@@ -75,7 +119,6 @@ const projects = [
     linear-gradient(90deg, rgba(109, 85, 38, 0.08) 2px, transparent 2px);
   background-size: 32px 32px;
   border-top: 4px solid var(--ui-ink);
-  box-shadow: 0 -8px 0 rgba(0, 0, 0, 0.25);
 }
 
 .projects__header {
@@ -107,6 +150,54 @@ const projects = [
   color: var(--ui-muted);
   font-size: 23px;
   line-height: 1.4;
+}
+
+.projects__filters {
+  display: flex;
+  justify-content: flex-end;
+  width: min(100%, 1000px);
+  margin: 0 auto 28px;
+}
+
+.projects__type-filter select {
+  min-height: 44px;
+  padding: 10px 14px;
+  color: var(--ui-ink);
+  background-color: var(--ui-surface-sunken);
+  border: 2px solid var(--ui-ink);
+  border-radius: 0;
+  outline: none;
+  font-family: var(--ui-font-body);
+  font-size: 22px;
+  box-shadow:
+    0 4px rgba(0, 0, 0, 0.4) inset,
+    0 -4px rgba(255, 255, 255, 0.55) inset,
+    4px 0 rgba(0, 0, 0, 0.25) inset,
+    -4px 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.projects__type-filter select:hover,
+.projects__type-filter select:focus-visible {
+  background-color: var(--ui-surface);
+}
+
+.projects__type-filter select:focus-visible {
+  box-shadow:
+    0 4px rgba(0, 0, 0, 0.4) inset,
+    0 -4px rgba(255, 255, 255, 0.55) inset,
+    4px 0 rgba(0, 0, 0, 0.25) inset,
+    -4px 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .projects__grid {
@@ -165,5 +256,6 @@ const projects = [
   .projects__grid {
     grid-template-columns: 1fr;
   }
+
 }
 </style>

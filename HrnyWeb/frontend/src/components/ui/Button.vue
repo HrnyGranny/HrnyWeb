@@ -12,19 +12,27 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  href: {
+    type: String,
+    default: "",
+  },
 })
 </script>
 
 <template>
-  <button
+  <component
+    :is="href ? 'a' : 'button'"
     class="ui-btn"
-    :type="type"
-    :disabled="disabled || loading"
+    :type="href ? undefined : type"
+    :href="href || undefined"
+    :target="href ? '_blank' : undefined"
+    :rel="href ? 'noopener noreferrer' : undefined"
+    :disabled="href ? undefined : disabled || loading"
   >
     <span class="ui-btn__label">
       <slot>{{ loading ? "LOADING..." : "BUTTON" }}</slot>
     </span>
-  </button>
+  </component>
 </template>
 
 <style scoped>
@@ -45,6 +53,7 @@ defineProps({
   font-family: var(--ui-font-display);
   font-size: 12px;
   letter-spacing: 1px;
+  text-decoration: none;
   text-transform: uppercase;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
   white-space: nowrap;
