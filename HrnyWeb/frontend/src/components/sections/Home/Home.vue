@@ -2,8 +2,11 @@
 import { onBeforeUnmount, onMounted, ref } from "vue"
 
 import profileImage from "@/assets/img/HrnyGranny.png"
+import Button from "@/components/ui/Button.vue"
+import Game from "@/components/sections/Home/Game.vue"
 
 const isScrolled = ref(false)
+const isGameOpen = ref(false)
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 180
@@ -34,36 +37,25 @@ onBeforeUnmount(() => {
         />
       </div>
 
-      <p class="home__eyebrow">
-        PLAYER PROFILE
-      </p>
-
       <h1 class="home__title">
         HrnyGranny
       </h1>
 
       <p class="home__description">
-        Developer building things one pixel at a time.
+        If you are already here, just play the game. Can you beat me?
       </p>
 
-      <a
-        class="home__github"
-        href="https://github.com/TU-USUARIO"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span class="home__github-icon">
-          &lt;/&gt;
-        </span>
-
-        <span>Visit GitHub</span>
-      </a>
+      <Button class="home__play" @click="isGameOpen = true">
+        Play
+     </Button>
     </div>
 
     <a class="home__scroll" href="#projects">
       <span>Scroll to continue</span>
       <span class="home__scroll-arrow">▼</span>
     </a>
+
+    <Game v-if="isGameOpen" @close="isGameOpen = false" />
   </section>
 </template>
 
@@ -120,19 +112,11 @@ onBeforeUnmount(() => {
   object-fit: contain;
 }
 
-.home__eyebrow {
-  margin: 0 0 18px;
-  color: var(--ui-gold);
-  font-family: var(--ui-font-label);
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
 .home__title {
   margin: 0;
   color: var(--ui-surface);
   font-family: var(--ui-font-display);
-  font-size: clamp(28px, 6vw, 58px);
+  font-size: clamp(31px, 6.6vw, 64px);
   line-height: 1.3;
   text-shadow:
     4px 4px 0 var(--ui-primary),
@@ -140,46 +124,15 @@ onBeforeUnmount(() => {
 }
 
 .home__description {
-  max-width: 520px;
+  max-width: 580px;
   margin: 26px auto;
   color: var(--ui-muted);
   font-size: 24px;
   line-height: 1.4;
 }
 
-.home__github {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
-  color: var(--ui-ink);
-  background-color: var(--ui-gold);
-  border: 2px solid var(--ui-ink);
-  font-family: var(--ui-font-label);
-  font-size: 12px;
-  text-decoration: none;
-  text-transform: uppercase;
-  box-shadow:
-    0 -4px rgba(138, 85, 16, 0.55) inset,
-    0 4px rgba(255, 210, 122, 0.95) inset,
-    0 5px 0 rgba(0, 0, 0, 0.35);
-  transition: transform 120ms ease;
-}
-
-.home__github:hover {
-  transform: translateY(-2px);
-}
-
-.home__github:active {
-  transform: translateY(3px);
-  box-shadow:
-    0 -4px rgba(138, 85, 16, 0.55) inset,
-    0 4px rgba(255, 210, 122, 0.95) inset;
-}
-
-.home__github-icon {
-  font-family: var(--ui-font-display);
-  font-size: 10px;
+.home__play :deep(.ui-btn) {
+  min-width: 140px;
 }
 
 .home__scroll {
