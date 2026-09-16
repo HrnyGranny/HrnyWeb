@@ -13,7 +13,7 @@ const handleScroll = () => {
 
 const openGitHub = () => {
 	window.open(
-		"https://github.com/TU-USUARIO",
+		"https://github.com/HrnyGranny",
 		"_blank",
 		"noopener,noreferrer",
 	)
@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 			</a>
 
 			<a href="#about">
-				About
+				About Me
 			</a>
 		</div>
 
@@ -76,8 +76,20 @@ onBeforeUnmount(() => {
 			/>
 
 			<div class="home__github-button">
-				<Button @click="openGitHub">
-					GitHub
+				<Button
+					aria-label="Open GitHub profile"
+					@click="openGitHub"
+				>
+					<svg
+						class="home__github-icon"
+						viewBox="0 0 24 24"
+						aria-hidden="true"
+					>
+						<path
+							fill="currentColor"
+							d="M12 2C6.48 2 2 6.58 2 12.22c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.2 9.2 0 0 1 12 6.96c.85 0 1.7.12 2.5.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.23 10.23 0 0 0 22 12.22C22 6.58 17.52 2 12 2Z"
+						/>
+					</svg>
 				</Button>
 			</div>
 		</div>
@@ -165,6 +177,12 @@ onBeforeUnmount(() => {
 	font-size: 10px;
 }
 
+.home__github-icon {
+	display: block;
+	width: 18px;
+	height: 18px;
+}
+
 @media (max-width: 600px) {
 	.home__navbar {
 		top: 8px;
@@ -177,6 +195,17 @@ onBeforeUnmount(() => {
 
 	.home__actions {
 		gap: 8px;
+	}
+
+	.home__links {
+		position: static;
+		gap: 8px;
+		margin: 0 auto;
+		transform: none;
+	}
+
+	.home__links a {
+		font-size: 9px;
 	}
 
 	.home__github-button :deep(.ui-btn) {
