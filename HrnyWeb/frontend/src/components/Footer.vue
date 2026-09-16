@@ -17,7 +17,7 @@ const githubUrl = "https://github.com/hrnygranny"
       </a>
     </span>
 
-    <span>Code · Create · Repeat</span>
+    <span>v1.0.0</span>
   </footer>
 </template>
 

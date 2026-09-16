@@ -9,30 +9,37 @@ const technologyGroups = [
       {
         name: "JavaScript",
         slug: "javascript",
+        color: "f7df1e",
       },
       {
         name: "React",
         slug: "react",
+        color: "61dafb",
       },
       {
         name: "Angular",
         slug: "angular",
+        color: "dd0031",
       },
       {
         name: "Vue",
         slug: "vuedotjs",
+        color: "4fc08d",
       },
       {
         name: "Node.js",
         slug: "nodedotjs",
+        color: "5fa04e",
       },
       {
         name: "CSS",
         slug: "css3",
+        color: "1572b6",
       },
       {
         name: "HTML",
         slug: "html5",
+        color: "e34f26",
       },
     ],
   },
@@ -43,18 +50,22 @@ const technologyGroups = [
       {
         name: "Java",
         slug: "openjdk",
+        color: "f89820",
       },
       {
         name: "Python",
         slug: "python",
+        color: "3776ab",
       },
       {
         name: "C++",
         slug: "cplusplus",
+        color: "00599c",
       },
       {
         name: "C",
         slug: "c",
+        color: "a8b9cc",
       },
     ],
   },
@@ -65,10 +76,12 @@ const technologyGroups = [
       {
         name: "MySQL",
         slug: "mysql",
+        color: "4479a1",
       },
       {
         name: "MongoDB",
         slug: "mongodb",
+        color: "47a248",
       },
     ],
   },
@@ -79,18 +92,22 @@ const technologyGroups = [
       {
         name: "Linux",
         slug: "linux",
+        color: "fcc624",
       },
       {
         name: "Windows",
         slug: "windows11",
+        color: "0078d4",
       },
       {
         name: "Azure",
         slug: "microsoftazure",
+        color: "0078d4",
       },
       {
         name: "AWS",
         slug: "amazonaws",
+        color: "ff9900",
       },
     ],
   },
@@ -101,14 +118,17 @@ const technologyGroups = [
       {
         name: "Firebase",
         slug: "firebase",
+        color: "ffca28",
       },
       {
         name: "Cloudflare",
         slug: "cloudflare",
+        color: "f38020",
       },
       {
         name: "Kubernetes",
         slug: "kubernetes",
+        color: "326ce5",
       },
     ],
   },
@@ -119,22 +139,27 @@ const technologyGroups = [
       {
         name: "GitHub",
         slug: "github",
+        color: "181717",
       },
       {
         name: "Docker",
         slug: "docker",
+        color: "2496ed",
       },
       {
         name: "Git",
         slug: "git",
+        color: "f05032",
       },
       {
         name: "Visual Studio",
         slug: "visualstudio",
+        color: "5c2d91",
       },
       {
         name: "VS Code",
         slug: "visualstudiocode",
+        color: "007acc",
       },
     ],
   },
@@ -194,10 +219,15 @@ const technologyGroups = [
               :aria-label="`${technology.name} logo`"
             >
               <template #icon>
-                <img
-                  :src="`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${technology.slug}.svg`"
-                  :alt="`${technology.name} logo`"
-                />
+                <span
+                  class="about__technology-logo"
+                  role="img"
+                  :aria-label="`${technology.name} logo`"
+                  :style="{
+                    '--technology-color': `#${technology.color}`,
+                    '--technology-logo': `url(https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${technology.slug}.svg)`,
+                  }"
+                ></span>
               </template>
             </Icon>
 
@@ -390,10 +420,12 @@ const technologyGroups = [
   transform: translateY(-2px);
 }
 
-.about__technology-icon :deep(img) {
+.about__technology-logo {
   width: 28px;
   height: 28px;
-  object-fit: contain;
+  background-color: var(--technology-color);
+  -webkit-mask: var(--technology-logo) center / contain no-repeat;
+  mask: var(--technology-logo) center / contain no-repeat;
 }
 
 .about__technology-name {
