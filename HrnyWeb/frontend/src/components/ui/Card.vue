@@ -59,11 +59,6 @@ defineProps({
 
 <style scoped>
 .ui-card {
-  --ui-card-surface: #fbf5dd;
-  --ui-card-ink: #1c1c1c;
-  --ui-card-muted: #6d5526;
-  --ui-card-gold: #f0a232;
-  --ui-card-primary: #2fa84f;
   --ui-card-notch: 12px;
 
   position: relative;
@@ -71,9 +66,9 @@ defineProps({
   max-width: 300px;
   padding: 24px;
   box-sizing: border-box;
-  background-color: var(--ui-card-surface);
-  color: var(--ui-card-ink);
-  font-family: "VT323", "Courier New", monospace;
+  background-color: var(--ui-surface);
+  color: var(--ui-ink);
+  font-family: var(--ui-font-body);
 
   clip-path: polygon(
     var(--ui-card-notch) 0,
@@ -101,13 +96,13 @@ defineProps({
   gap: 12px;
   padding-bottom: 12px;
   margin-bottom: 16px;
-  border-bottom: 2px dashed var(--ui-card-muted);
+  border-bottom: 2px dashed var(--ui-muted);
 }
 
 .ui-card__title {
   margin: 0;
-  color: var(--ui-card-ink);
-  font-family: "Press Start 2P", "Courier New", monospace;
+  color: var(--ui-ink);
+  font-family: var(--ui-font-display);
   font-size: 14px;
   line-height: 1.4;
   letter-spacing: 0.5px;
@@ -116,10 +111,10 @@ defineProps({
 .ui-card__chip {
   flex-shrink: 0;
   padding: 4px 8px;
-  color: var(--ui-card-ink);
-  background-color: var(--ui-card-gold);
-  border: 2px solid var(--ui-card-ink);
-  font-family: "Silkscreen", "Courier New", monospace;
+  color: var(--ui-ink);
+  background-color: var(--ui-gold);
+  border: 2px solid var(--ui-ink);
+  font-family: var(--ui-font-label);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -127,7 +122,7 @@ defineProps({
 }
 
 .ui-card__body {
-  color: var(--ui-card-ink);
+  color: var(--ui-ink);
   font-size: 18px;
   line-height: 1.4;
 }
@@ -143,20 +138,20 @@ defineProps({
   gap: 12px;
   padding-top: 16px;
   margin-top: 16px;
-  border-top: 2px dashed var(--ui-card-muted);
+  border-top: 2px dashed var(--ui-muted);
 }
 
 .ui-card__reward {
-  color: var(--ui-card-primary);
-  font-family: "Press Start 2P", "Courier New", monospace;
+  color: var(--ui-primary);
+  font-family: var(--ui-font-display);
   font-size: 12px;
   line-height: 1.4;
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.18);
 }
 
 .ui-card__meta {
-  color: var(--ui-card-muted);
-  font-family: "Silkscreen", "Courier New", monospace;
+  color: var(--ui-muted);
+  font-family: var(--ui-font-label);
   font-size: 10px;
   text-align: right;
   text-transform: uppercase;

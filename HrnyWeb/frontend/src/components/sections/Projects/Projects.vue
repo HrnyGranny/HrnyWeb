@@ -87,7 +87,7 @@ const projects = [
 .projects__eyebrow {
   margin: 0 0 14px;
   color: var(--ui-muted);
-  font-family: "Silkscreen", monospace;
+  font-family: var(--ui-font-label);
   font-size: 12px;
   letter-spacing: 2px;
 }
@@ -95,7 +95,7 @@ const projects = [
 .projects__title {
   margin: 0;
   color: var(--ui-ink);
-  font-family: "Press Start 2P", monospace;
+  font-family: var(--ui-font-display);
   font-size: clamp(26px, 5vw, 42px);
   line-height: 1.3;
   text-transform: uppercase;

@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
 .home__eyebrow {
   margin: 0 0 18px;
   color: var(--ui-gold);
-  font-family: "Silkscreen", monospace;
+  font-family: var(--ui-font-label);
   font-size: 12px;
   letter-spacing: 2px;
 }
@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
 .home__title {
   margin: 0;
   color: var(--ui-surface);
-  font-family: "Press Start 2P", monospace;
+  font-family: var(--ui-font-display);
   font-size: clamp(28px, 6vw, 58px);
   line-height: 1.3;
   text-shadow:
@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
   color: var(--ui-ink);
   background-color: var(--ui-gold);
   border: 2px solid var(--ui-ink);
-  font-family: "Silkscreen", monospace;
+  font-family: var(--ui-font-label);
   font-size: 12px;
   text-decoration: none;
   text-transform: uppercase;
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 }
 
 .home__github-icon {
-  font-family: "Press Start 2P", monospace;
+  font-family: var(--ui-font-display);
   font-size: 10px;
 }
 
@@ -190,7 +190,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   gap: 8px;
   color: var(--ui-muted);
-  font-family: "Silkscreen", monospace;
+  font-family: var(--ui-font-label);
   font-size: 10px;
   letter-spacing: 1px;
   text-decoration: none;

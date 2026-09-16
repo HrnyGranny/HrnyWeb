@@ -37,19 +37,11 @@ const emit = defineEmits(["update:modelValue"])
 
 <style scoped>
 .ui-switch {
-  --ui-switch-sunken: #ead8a3;
-  --ui-switch-ink: #1c1c1c;
-  --ui-switch-muted: #6d5526;
-  --ui-switch-primary: #2fa84f;
-  --ui-switch-primary-hi: rgba(100, 253, 31, 0.99);
-  --ui-switch-primary-lo: rgba(21, 108, 0, 0.5);
-  --ui-switch-text: #ffffff;
-
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-family: "Silkscreen", "Courier New", monospace;
+  font-family: var(--ui-font-label);
   cursor: pointer;
   user-select: none;
 }
@@ -71,8 +63,8 @@ const emit = defineEmits(["update:modelValue"])
   height: 36px;
   padding: 0 10px;
   box-sizing: border-box;
-  background-color: var(--ui-switch-sunken);
-  border: 2px solid var(--ui-switch-ink);
+  background-color: var(--ui-surface-sunken);
+  border: 2px solid var(--ui-ink);
   box-shadow:
     0 4px rgba(0, 0, 0, 0.4) inset,
     0 -4px rgba(255, 255, 255, 0.55) inset,
@@ -85,7 +77,7 @@ const emit = defineEmits(["update:modelValue"])
 .ui-switch__off {
   position: relative;
   z-index: 1;
-  color: var(--ui-switch-muted);
+  color: var(--ui-muted);
   font-size: 18px;
   line-height: 1;
 }
@@ -98,8 +90,8 @@ const emit = defineEmits(["update:modelValue"])
   width: 32px;
   height: 24px;
   box-sizing: border-box;
-  background-color: #fbf5dd;
-  border: 2px solid var(--ui-switch-ink);
+  background-color: var(--ui-surface);
+  border: 2px solid var(--ui-ink);
   transform: translateY(-50%);
   box-shadow:
     0 -3px rgba(0, 0, 0, 0.35) inset,
@@ -111,16 +103,16 @@ const emit = defineEmits(["update:modelValue"])
 }
 
 .ui-switch__input:checked + .ui-switch__track {
-  background-color: var(--ui-switch-primary);
+  background-color: var(--ui-primary);
   box-shadow:
-    0 -4px var(--ui-switch-primary-lo) inset,
-    0 4px var(--ui-switch-primary-hi) inset,
-    -4px 0 rgba(100, 253, 31, 0.5) inset,
-    4px 0 rgba(21, 108, 0, 0.5) inset;
+    0 -4px var(--ui-primary-lo) inset,
+    0 4px var(--ui-primary-hi) inset,
+    -4px 0 var(--ui-primary-hi) inset,
+    4px 0 var(--ui-primary-lo) inset;
 }
 
 .ui-switch__input:checked + .ui-switch__track .ui-switch__on {
-  color: var(--ui-switch-text);
+  color: var(--ui-white);
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -133,7 +125,7 @@ const emit = defineEmits(["update:modelValue"])
 }
 
 .ui-switch__input:focus-visible + .ui-switch__track {
-  outline: 3px solid #3aa0e6;
+  outline: 3px solid var(--ui-focus);
   outline-offset: 3px;
 }
 

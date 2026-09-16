@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
 	align-items: center;
 	gap: 10px;
 	color: var(--ui-ink);
-	font-family: "Press Start 2P", monospace;
+	font-family: var(--ui-font-display);
 	font-size: 11px;
 	text-decoration: none;
 }
@@ -142,7 +142,7 @@ onBeforeUnmount(() => {
 
 .home__links a {
 	color: var(--ui-muted);
-	font-family: "Silkscreen", monospace;
+	font-family: var(--ui-font-label);
 	font-size: 11px;
 	text-decoration: none;
 	text-transform: uppercase;

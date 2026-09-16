@@ -49,24 +49,17 @@ const emit = defineEmits(["update:modelValue"])
 
 <style scoped>
 .ui-field {
-  --ui-field-surface: #fbf5dd;
-  --ui-field-sunken: #ead8a3;
-  --ui-field-ink: #1c1c1c;
-  --ui-field-muted: #6d5526;
-  --ui-field-focus: #3aa0e6;
-  --ui-field-primary: #2fa84f;
-
   display: inline-flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
   max-width: 260px;
-  font-family: "VT323", "Courier New", monospace;
+  font-family: var(--ui-font-body);
 }
 
 .ui-field__label {
-  color: var(--ui-field-muted);
-  font-family: "Silkscreen", "Courier New", monospace;
+  color: var(--ui-muted);
+  font-family: var(--ui-font-label);
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -77,14 +70,14 @@ const emit = defineEmits(["update:modelValue"])
   min-height: 44px;
   padding: 10px 14px;
   box-sizing: border-box;
-  color: var(--ui-field-ink);
-  background-color: var(--ui-field-sunken);
-  border: 2px solid var(--ui-field-ink);
+  color: var(--ui-ink);
+  background-color: var(--ui-surface-sunken);
+  border: 2px solid var(--ui-ink);
   border-radius: 0;
   outline: none;
-  font-family: "VT323", "Courier New", monospace;
+  font-family: var(--ui-font-body);
   font-size: 22px;
-  caret-color: var(--ui-field-primary);
+  caret-color: var(--ui-primary);
   box-shadow:
     0 4px rgba(0, 0, 0, 0.4) inset,
     0 -4px rgba(255, 255, 255, 0.55) inset,
@@ -96,13 +89,13 @@ const emit = defineEmits(["update:modelValue"])
 }
 
 .ui-field__input::placeholder {
-  color: var(--ui-field-muted);
+  color: var(--ui-muted);
   opacity: 0.7;
 }
 
 .ui-field__input:hover:not(:disabled),
 .ui-field__input:focus {
-  background-color: var(--ui-field-surface);
+  background-color: var(--ui-surface);
 }
 
 .ui-field__input:focus-visible {
@@ -111,7 +104,7 @@ const emit = defineEmits(["update:modelValue"])
     0 -4px rgba(255, 255, 255, 0.55) inset,
     4px 0 rgba(0, 0, 0, 0.25) inset,
     -4px 0 rgba(255, 255, 255, 0.25) inset,
-    0 0 0 3px var(--ui-field-focus);
+    0 0 0 3px var(--ui-focus);
 }
 
 .ui-field__input:disabled {

@@ -45,14 +45,9 @@ defineProps({
 
 <style scoped>
 .ui-tooltip {
-  --ui-tooltip-surface: #fbf5dd;
-  --ui-tooltip-ink: #1c1c1c;
-  --ui-tooltip-muted: #6d5526;
-  --ui-tooltip-gold: #f0a232;
-
   position: relative;
   display: inline-flex;
-  font-family: "VT323", "Courier New", monospace;
+  font-family: var(--ui-font-body);
 }
 
 .ui-tooltip__trigger {
@@ -63,11 +58,11 @@ defineProps({
   width: 40px;
   height: 40px;
   padding: 0;
-  color: var(--ui-tooltip-ink);
-  background-color: var(--ui-tooltip-gold);
-  border: 2px solid var(--ui-tooltip-ink);
+  color: var(--ui-ink);
+  background-color: var(--ui-gold);
+  border: 2px solid var(--ui-ink);
   border-radius: 0;
-  font-family: "Press Start 2P", "Courier New", monospace;
+  font-family: var(--ui-font-display);
   font-size: 14px;
   cursor: pointer;
   box-shadow:
@@ -84,7 +79,7 @@ defineProps({
 }
 
 .ui-tooltip__trigger:focus-visible {
-  outline: 3px solid #3aa0e6;
+  outline: 3px solid var(--ui-focus);
   outline-offset: 3px;
 }
 
@@ -96,9 +91,9 @@ defineProps({
   min-width: 200px;
   padding: 10px 12px;
   box-sizing: border-box;
-  color: var(--ui-tooltip-ink);
-  background-color: var(--ui-tooltip-surface);
-  border: 2px solid var(--ui-tooltip-ink);
+  color: var(--ui-ink);
+  background-color: var(--ui-surface);
+  border: 2px solid var(--ui-ink);
   font-size: 18px;
   line-height: 1.25;
   text-align: left;
@@ -128,14 +123,14 @@ defineProps({
 
 .ui-tooltip__bubble::before {
   bottom: -10px;
-  border-top: 10px solid var(--ui-tooltip-ink);
+  border-top: 10px solid var(--ui-ink);
   border-right: 8px solid transparent;
   border-left: 8px solid transparent;
 }
 
 .ui-tooltip__bubble::after {
   bottom: -6px;
-  border-top: 8px solid var(--ui-tooltip-surface);
+  border-top: 8px solid var(--ui-surface);
   border-right: 6px solid transparent;
   border-left: 6px solid transparent;
 }
@@ -143,8 +138,8 @@ defineProps({
 .ui-tooltip__title {
   display: block;
   margin-bottom: 4px;
-  color: var(--ui-tooltip-muted);
-  font-family: "Silkscreen", "Courier New", monospace;
+  color: var(--ui-muted);
+  font-family: var(--ui-font-label);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 1px;

@@ -29,12 +29,6 @@ defineProps({
 
 <style scoped>
 .ui-btn {
-  --ui-btn-primary: #2fa84f;
-  --ui-btn-primary-hi: rgba(100, 253, 31, 0.99);
-  --ui-btn-primary-lo: rgba(21, 108, 0, 0.5);
-  --ui-btn-ink: #1c1c1c;
-  --ui-btn-text: #ffffff;
-
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -42,13 +36,13 @@ defineProps({
   justify-content: center;
   min-height: 48px;
   padding: 14px 24px;
-  color: var(--ui-btn-text);
-  background-color: var(--ui-btn-primary);
+  color: var(--ui-white);
+  background-color: var(--ui-primary);
   border: 0;
   border-radius: 0;
-  outline: 2px solid var(--ui-btn-ink);
+  outline: 2px solid var(--ui-ink);
   outline-offset: 0;
-  font-family: "Press Start 2P", "Courier New", monospace;
+  font-family: var(--ui-font-display);
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -67,12 +61,12 @@ defineProps({
   inset: 0;
   content: "";
   pointer-events: none;
-  background-color: var(--ui-btn-primary);
+  background-color: var(--ui-primary);
   box-shadow:
-    0 -4px var(--ui-btn-primary-lo) inset,
-    0 4px var(--ui-btn-primary-hi) inset,
-    -4px 0 rgba(100, 253, 31, 0.5) inset,
-    4px 0 rgba(21, 108, 0, 0.5) inset;
+    0 -4px var(--ui-primary-lo) inset,
+    0 4px var(--ui-primary-hi) inset,
+    -4px 0 var(--ui-primary-hi) inset,
+    4px 0 var(--ui-primary-lo) inset;
 }
 
 .ui-btn::after {
@@ -100,7 +94,7 @@ defineProps({
 }
 
 .ui-btn:focus-visible {
-  outline: 3px solid #3aa0e6;
+  outline: 3px solid var(--ui-focus);
   outline-offset: 4px;
 }
 

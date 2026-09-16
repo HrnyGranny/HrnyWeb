@@ -57,27 +57,20 @@ const activeCells = computed(() => {
 
 <style scoped>
 .ui-loader {
-  --ui-loader-sunken: #ead8a3;
-  --ui-loader-ink: #1c1c1c;
-  --ui-loader-muted: #6d5526;
-  --ui-loader-primary: #2fa84f;
-  --ui-loader-primary-hi: rgba(100, 253, 31, 0.99);
-  --ui-loader-primary-lo: rgba(21, 108, 0, 0.5);
-
   display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
   max-width: 280px;
-  color: var(--ui-loader-ink);
-  font-family: "Silkscreen", "Courier New", monospace;
+  color: var(--ui-ink);
+  font-family: var(--ui-font-label);
 }
 
 .ui-loader__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--ui-loader-muted);
+  color: var(--ui-muted);
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -88,8 +81,8 @@ const activeCells = computed(() => {
   display: flex;
   padding: 6px;
   overflow: hidden;
-  background-color: var(--ui-loader-sunken);
-  border: 2px solid var(--ui-loader-ink);
+  background-color: var(--ui-surface-sunken);
+  border: 2px solid var(--ui-ink);
   box-shadow:
     0 4px rgba(0, 0, 0, 0.4) inset,
     0 -4px rgba(255, 255, 255, 0.55) inset,
@@ -125,9 +118,9 @@ const activeCells = computed(() => {
 }
 
 .ui-loader__cell--active {
-  background-color: var(--ui-loader-primary);
+  background-color: var(--ui-primary);
   box-shadow:
-    inset 0 2px var(--ui-loader-primary-hi),
-    inset 0 -2px var(--ui-loader-primary-lo);
+    inset 0 2px var(--ui-primary-hi),
+    inset 0 -2px var(--ui-primary-lo);
 }
 </style>
