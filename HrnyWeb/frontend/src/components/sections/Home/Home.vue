@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue"
 
-import profileImage from "@/assets/img/HrnyGranny.png"
+import profileImage from "@/assets/img/HrnyGranny_Pixel.png"
 import Button from "@/components/ui/Button.vue"
 import Game from "@/components/sections/Home/Game.vue"
 
@@ -85,35 +85,41 @@ onBeforeUnmount(() => {
 .home__avatar-frame {
   display: grid;
   place-items: center;
-  width: 156px;
-  height: 156px;
-  margin: 0 auto 24px;
-  background-color: var(--ui-surface);
-  border: 4px solid var(--ui-ink);
-  clip-path: polygon(
-    14px 0,
-    calc(100% - 14px) 0,
-    100% 14px,
-    100% calc(100% - 14px),
-    calc(100% - 14px) 100%,
-    14px 100%,
-    0 calc(100% - 14px),
-    0 14px
-  );
-  box-shadow:
-    0 -6px rgba(0, 0, 0, 0.35) inset,
-    0 6px rgba(255, 255, 255, 0.65) inset,
-    0 10px 0 rgba(0, 0, 0, 0.35);
+  width: 388px;
+  height: 388px;
+  margin: 0 auto 18px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  clip-path: none;
+  perspective: 1200px;
 }
 
 .home__avatar {
-  width: 120px;
-  height: 120px;
+  display: block;
+  width: 388px;
+  height: 388px;
   object-fit: contain;
+  transform-origin: center;
+  transform: rotateY(0deg) rotateX(2deg) translateY(0);
+  animation: avatar-float 3s ease-in-out infinite;
+  transition: filter 260ms ease;
+  filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.35));
+}
+
+@keyframes avatar-float {
+  0%,
+  100% {
+    transform: rotateY(0deg) rotateX(2deg) translateY(0px);
+  }
+
+  50% {
+    transform: rotateY(2deg) rotateX(2deg) translateY(-10px);
+  }
 }
 
 .home__title {
-  margin: 0;
+  margin: 10px 0 0;
   color: var(--ui-surface);
   font-family: var(--ui-font-display);
   font-size: clamp(31px, 6.6vw, 64px);
@@ -176,13 +182,13 @@ onBeforeUnmount(() => {
   }
 
   .home__avatar-frame {
-    width: 132px;
-    height: 132px;
+    width: 230px;
+    height: 230px;
   }
 
   .home__avatar {
-    width: 100px;
-    height: 100px;
+    width: 230px;
+    height: 230px;
   }
 }
 

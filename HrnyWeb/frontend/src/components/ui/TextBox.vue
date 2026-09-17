@@ -103,8 +103,7 @@ const emit = defineEmits(["update:modelValue"])
     0 4px rgba(0, 0, 0, 0.4) inset,
     0 -4px rgba(255, 255, 255, 0.55) inset,
     4px 0 rgba(0, 0, 0, 0.25) inset,
-    -4px 0 rgba(255, 255, 255, 0.25) inset,
-    0 0 0 3px var(--ui-focus);
+    -4px 0 rgba(255, 255, 255, 0.25) inset;
 }
 
 .ui-field__input:disabled {

@@ -16,8 +16,10 @@ import {
   STARTING_LIVES,
 } from "@/assets/js/Game.js"
 
+import BackGround from "@/assets/img/WindowsXP_Pixel2.jpeg"
 import Button from "@/components/ui/Button.vue"
 import TextBox from "@/components/ui/TextBox.vue"
+import Window from "./Window.vue"
 
 const emit = defineEmits(["close"])
 
@@ -213,11 +215,23 @@ onBeforeUnmount(() => {
     >
       <section
         class="game-modal__panel"
+        :class="{
+          'game-modal__panel--playing': game.isPlaying,
+          'game-modal__panel--results': game.isFinished,
+        }"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="game-modal-title"
+        :aria-labelledby="game.isPlaying ? undefined : 'game-modal-title'"
+        :aria-label="game.isPlaying ? 'Granny EXE game' : undefined"
+        :style="{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)), url(${BackGround})`,
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }"
       >
         <Button
+          v-if="!game.isPlaying"
           ref="closeButton"
           class="game-modal__close"
           type="button"
@@ -227,7 +241,10 @@ onBeforeUnmount(() => {
           <span aria-hidden="true">×</span>
         </Button>
 
-        <header class="game-modal__header">
+        <header
+          v-if="!game.isPlaying && !game.isFinished"
+          class="game-modal__header"
+        >
           <h1
             id="game-modal-title"
             class="game-modal__title"
@@ -241,71 +258,73 @@ onBeforeUnmount(() => {
           v-if="!game.isPlaying && !game.isFinished"
           class="game-modal__setup"
         >
-          <div class="game-modal__instructions">
-            <div class="game-modal__rules">
-              <div
-                class="game-modal__rule game-modal__rule--danger"
-              >
+          <Window title="System instructions">
+            <div class="game-modal__instructions">
+              <div class="game-modal__rules">
+                <div
+                  class="game-modal__rule game-modal__rule--danger"
+                >
+                  <span
+                    class="game-modal__rule-sample"
+                    aria-hidden="true"
+                  ></span>
+
+                  <span>
+                    Close
+                    <strong>red popups</strong>
+                  </span>
+                </div>
+
                 <span
-                  class="game-modal__rule-sample"
-                  aria-hidden="true"
-                ></span>
-
-                <span>
-                  Close
-                  <strong>red popups</strong>
-                </span>
-              </div>
-
-              <span
-                class="game-modal__rule-divider"
-                aria-hidden="true"
-              >
-                +
-              </span>
-
-              <div
-                class="game-modal__rule game-modal__rule--safe"
-              >
-                <span
-                  class="game-modal__rule-sample"
-                  aria-hidden="true"
-                ></span>
-
-                <span>
-                  Ignore
-                  <strong>green messages</strong>
-                </span>
-              </div>
-
-              <span
-                class="game-modal__rule-divider"
-                aria-hidden="true"
-              >
-                =
-              </span>
-
-              <div
-                class="game-modal__rule game-modal__rule--life"
-              >
-                <span
-                  class="game-modal__rule-heart"
+                  class="game-modal__rule-divider"
                   aria-hidden="true"
                 >
-                  ♥
+                  +
                 </span>
 
-                <span>
-                  Keep your
-                  <strong>5 lives</strong>
+                <div
+                  class="game-modal__rule game-modal__rule--safe"
+                >
+                  <span
+                    class="game-modal__rule-sample"
+                    aria-hidden="true"
+                  ></span>
+
+                  <span>
+                    Ignore
+                    <strong>green messages</strong>
+                  </span>
+                </div>
+
+                <span
+                  class="game-modal__rule-divider"
+                  aria-hidden="true"
+                >
+                  =
                 </span>
+
+                <div
+                  class="game-modal__rule game-modal__rule--life"
+                >
+                  <span
+                    class="game-modal__rule-heart"
+                    aria-hidden="true"
+                  >
+                    ♥
+                  </span>
+
+                  <span>
+                    Keep your
+                    <strong>5 lives</strong>
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <p class="game-modal__instruction-note">
-              The system gets faster while you survive
-            </p>
-          </div>
+              <p class="game-modal__instruction-note">
+                The system gets faster while you survive
+              </p>
+            </div>
+          </Window>
 
           <TextBox
             v-model="playerName"
@@ -413,9 +432,6 @@ onBeforeUnmount(() => {
             </TransitionGroup>
           </div>
 
-          <p class="game-modal__hint">
-            Close red · Ignore green · Survive
-          </p>
         </div>
 
         <div
@@ -423,51 +439,64 @@ onBeforeUnmount(() => {
           class="game-modal__leaderboard"
         >
           <h2 class="game-modal__leaderboard-title">
-            System Failure
+            GAME OVER
           </h2>
 
           <div class="game-modal__final-stats">
-            <p>
-              Final score
-              <strong>{{ game.score }}</strong>
-            </p>
+            <Window
+              class="game-modal__stat-window"
+              title="Final score"
+            >
+              <strong class="game-modal__stat-value">
+                {{ game.score }}
+              </strong>
+            </Window>
 
-            <p>
-              Survival time
-              <strong>{{ formattedTime }}</strong>
-            </p>
+            <Window
+              class="game-modal__stat-window"
+              title="Survival time"
+            >
+              <strong class="game-modal__stat-value">
+                {{ formattedTime }}
+              </strong>
+            </Window>
           </div>
 
-          <ol
-            v-if="leaderboard.length"
-            class="game-modal__scores"
+          <Window
+            class="game-modal__leaderboard-window"
+            title="Leaderboard"
           >
-            <li
-              v-for="(entry, index) in leaderboard"
-              :key="`${entry.name}-${entry.score}-${entry.time}-${index}`"
+            <ol
+              v-if="leaderboard.length"
+              class="game-modal__scores"
             >
-              <span class="game-modal__position">
-                #{{ index + 1 }}
-              </span>
+              <li
+                v-for="(entry, index) in leaderboard"
+                :key="`${entry.name}-${entry.score}-${entry.time}-${index}`"
+              >
+                <span class="game-modal__position">
+                  #{{ index + 1 }}
+                </span>
 
-              <span class="game-modal__player">
-                {{ entry.name }}
-              </span>
+                <span class="game-modal__player">
+                  {{ entry.name }}
+                </span>
 
-              <span class="game-modal__score">
-                {{ entry.score }}
-              </span>
+                <span class="game-modal__score">
+                  {{ entry.score }}
+                </span>
 
-              <small>{{ entry.time ?? 0 }}s</small>
-            </li>
-          </ol>
+                <small>{{ entry.time ?? 0 }}s</small>
+              </li>
+            </ol>
 
-          <p
-            v-else
-            class="game-modal__message"
-          >
-            No scores yet.
-          </p>
+            <p
+              v-else
+              class="game-modal__message"
+            >
+              No scores yet.
+            </p>
+          </Window>
 
           <Button
             class="game-modal__start"
@@ -496,11 +525,15 @@ onBeforeUnmount(() => {
 
 .game-modal__panel {
   position: relative;
+  box-sizing: border-box;
   width: min(100%, 893px);
   padding: 48px 44px 40px;
   color: var(--ui-ink);
   text-align: center;
   background-color: var(--ui-surface);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   border: 4px solid var(--ui-ink);
   box-shadow:
     0 -6px rgba(0, 0, 0, 0.3) inset,
@@ -508,6 +541,19 @@ onBeforeUnmount(() => {
     -6px 0 rgba(255, 255, 255, 0.2) inset,
     6px 0 rgba(0, 0, 0, 0.2) inset,
     0 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.game-modal__panel--playing {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 1100px);
+  min-height: min(720px, calc(100vh - 48px));
+  padding: 24px;
+}
+
+.game-modal__panel--results {
+  width: min(100%, 960px);
+  padding: 48px 56px 44px;
 }
 
 /* Botón de cierre */
@@ -578,20 +624,28 @@ onBeforeUnmount(() => {
 
 /* Instrucciones */
 
+.game-modal__setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 18px 16px 24px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
 .game-modal__instructions {
-  width: min(100%, 700px);
-  margin: 0 auto 28px;
+  width: 100%;
+  margin: 0;
   overflow: hidden;
   color: var(--ui-ink);
-  background-color: var(--ui-surface);
-  border: 2px solid var(--ui-ink);
+  background-color: #dfe4df;
+  border: 0;
   text-align: left;
-  box-shadow:
-    0 -4px rgba(0, 0, 0, 0.3) inset,
-    0 4px rgba(255, 255, 255, 0.65) inset,
-    -4px 0 rgba(255, 255, 255, 0.25) inset,
-    4px 0 rgba(0, 0, 0, 0.2) inset,
-    0 5px 0 rgba(0, 0, 0, 0.25);
 }
 
 .game-modal__rules {
@@ -660,9 +714,9 @@ onBeforeUnmount(() => {
 .game-modal__rule-heart {
   display: grid;
   place-items: center;
-  flex: 0 0 32px;
-  width: 32px;
-  height: 32px;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
   color: #d83a3a;
   font-family: "Press Start 2P", monospace;
   font-size: 17px;
@@ -679,9 +733,9 @@ onBeforeUnmount(() => {
 .game-modal__instruction-note {
   margin: 0;
   padding: 10px 12px;
-  color: var(--ui-muted);
-  background-color: var(--ui-surface-sunken);
-  border-top: 2px dashed var(--ui-muted);
+  color: var(--ui-ink);
+  background-color: #dfe4df;
+  border-top: 2px dashed rgba(0, 0, 0, 0.35);
   font-family: "Silkscreen", monospace;
   font-size: 8px;
   line-height: 1.4;
@@ -693,7 +747,7 @@ onBeforeUnmount(() => {
 
 .game-modal__name {
   display: block;
-  max-width: 340px;
+  width: min(100%, 340px);
   margin: 0 auto;
 }
 
@@ -703,7 +757,11 @@ onBeforeUnmount(() => {
 
 .game-modal__start {
   display: flex;
-  margin: 20px auto 0;
+  margin: 0 auto;
+}
+
+.game-modal__leaderboard .game-modal__start {
+  margin-top: 24px;
 }
 
 /* HUD del juego */
@@ -715,6 +773,13 @@ onBeforeUnmount(() => {
   gap: 18px;
   min-height: 70px;
   margin-bottom: 16px;
+}
+
+.game-modal__panel--playing .game-modal__play {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .game-modal__hud-time,
@@ -783,7 +848,7 @@ onBeforeUnmount(() => {
   gap: 6px;
   color: #e13b3b;
   font-family: "Press Start 2P", monospace;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1;
   text-shadow:
     2px 2px 0 #7c1717,
@@ -818,6 +883,16 @@ onBeforeUnmount(() => {
   box-shadow:
     0 5px rgba(0, 0, 0, 0.35) inset,
     0 -5px rgba(255, 255, 255, 0.12) inset;
+}
+
+.game-modal__panel--playing .game-board {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+  background-color: transparent;
+  background-image: none;
+  border: 0;
+  box-shadow: none;
 }
 
 /* Popups */
@@ -932,15 +1007,6 @@ onBeforeUnmount(() => {
   outline-offset: 3px;
 }
 
-.game-modal__hint {
-  margin: 12px 0 0;
-  color: var(--ui-muted);
-  font-family: "Silkscreen", monospace;
-  font-size: 8px;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
-
 /* Animaciones */
 
 .popup-enter-active,
@@ -977,26 +1043,29 @@ onBeforeUnmount(() => {
   margin-top: 22px;
 }
 
-.game-modal__final-stats p {
-  min-width: 150px;
-  margin: 0;
-  padding: 10px 14px;
-  color: var(--ui-muted);
-  background-color: var(--ui-surface-sunken);
-  border: 2px solid var(--ui-ink);
-  font-family: "Silkscreen", monospace;
-  font-size: 9px;
-  text-transform: uppercase;
-  box-shadow:
-    0 3px rgba(0, 0, 0, 0.25) inset,
-    0 -3px rgba(255, 255, 255, 0.4) inset;
+.game-modal__leaderboard-window {
+  width: min(100%, 720px);
+  margin: 24px auto 0;
 }
 
-.game-modal__final-stats strong {
+.game-modal__leaderboard-window :deep(.xp-window__body) {
+  background-color: #dfe4df;
+}
+
+.game-modal__stat-window {
+  width: min(100%, 180px);
+}
+
+.game-modal__stat-window :deep(.xp-window__body) {
+  padding: 12px 14px;
+}
+
+.game-modal__stat-value {
   display: block;
-  margin-top: 7px;
   color: var(--ui-primary);
-  font-size: 13px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 15px;
+  line-height: 1.2;
 }
 
 .game-modal__message {
@@ -1007,20 +1076,16 @@ onBeforeUnmount(() => {
 }
 
 .game-modal__scores {
+  width: 90%;
   max-width: 520px;
-  margin: 22px auto 0;
+  margin: 0 auto;
   padding: 0;
   overflow: hidden;
   color: var(--ui-ink);
-  background-color: var(--ui-surface-sunken);
-  border: 2px solid var(--ui-ink);
   font-family: "Silkscreen", monospace;
   font-size: 10px;
   list-style: none;
   text-align: left;
-  box-shadow:
-    0 4px rgba(0, 0, 0, 0.3) inset,
-    0 -4px rgba(255, 255, 255, 0.4) inset;
 }
 
 .game-modal__scores li {
@@ -1077,6 +1142,11 @@ onBeforeUnmount(() => {
   .game-board {
     height: 360px;
   }
+
+  .game-modal__panel--playing {
+    min-height: calc(100vh - 28px);
+    padding: 18px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1127,6 +1197,11 @@ onBeforeUnmount(() => {
     width: 100%;
     margin: 8px 0;
     padding: 52px 12px 22px;
+  }
+
+  .game-modal__panel--playing {
+    min-height: calc(100vh - 20px);
+    padding: 18px 10px 14px;
   }
 
   .game-modal__close {
@@ -1204,7 +1279,7 @@ onBeforeUnmount(() => {
 
   .game-modal__lives {
     gap: 2px;
-    font-size: 14px;
+    font-size: 17px;
   }
 
   .game-board {
