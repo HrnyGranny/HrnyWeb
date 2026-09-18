@@ -434,10 +434,6 @@ defineProps({
   box-shadow: none;
 }
 
-.xp-window--stat .xp-window__controls {
-  display: none;
-}
-
 .xp-window--stat .xp-window__bar {
   padding-right: 10px;
 }
@@ -446,10 +442,6 @@ defineProps({
 
 .xp-window--instructions {
   width: min(100%, 780px);
-}
-
-.xp-window--instructions .xp-window__controls {
-  display: none;
 }
 
 .xp-window--instructions .xp-window__bar {
@@ -467,10 +459,6 @@ defineProps({
   box-sizing: border-box;
   padding: 12px 18px;
   box-shadow: none;
-}
-
-.xp-window--leaderboard .xp-window__controls {
-  display: none;
 }
 
 .xp-window--leaderboard .xp-window__bar {

@@ -408,6 +408,7 @@ onBeforeUnmount(() => {
                   :key="popup.id"
                   as="button"
                   variant="popup"
+                  :title="popup.title"
                   class="game-popup"
                   :class="`game-popup--${popup.type}`"
                   type="button"
