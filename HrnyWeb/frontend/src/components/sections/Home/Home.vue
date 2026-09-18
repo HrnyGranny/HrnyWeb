@@ -42,7 +42,7 @@ onBeforeUnmount(() => {
       </h1>
 
       <p class="home__description">
-        If you are already here, just play the game. Can you beat me?
+        If you are already here, just play the game.
       </p>
 
       <Button class="home__play" @click="isGameOpen = true">

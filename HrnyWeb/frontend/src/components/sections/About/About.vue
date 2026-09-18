@@ -174,7 +174,7 @@ const technologyGroups = [
       </p>
 
       <h2 class="about__title">
-        About Me
+        Skills
       </h2>
 
       <p class="about__description">

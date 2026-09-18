@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 			</a>
 
 			<a href="#about">
-				About Me
+				Skills
 			</a>
 		</div>
 
