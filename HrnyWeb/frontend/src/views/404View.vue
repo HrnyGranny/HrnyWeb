@@ -8,7 +8,7 @@ import Card from "@/components/ui/Card.vue"
 const router = useRouter()
 
 const goHome = () => {
-  router.push("/HrnyWeb/")
+  router.push({ name: "home" })
 }
 
 onMounted(() => {

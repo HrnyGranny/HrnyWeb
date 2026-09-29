@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import NotFoundView from '../views/404View.vue'
 import HomeView from '../views/HomeView.vue'
+import DashBoardView from '../views/DashBoardView.vue'
 
 const routes = [
   {
-    path: '/HrnyWeb/',
+    path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: DashBoardView
   },
   {
     path: '/:pathMatch(.*)*',
@@ -16,7 +22,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
